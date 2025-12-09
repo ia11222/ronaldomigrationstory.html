@@ -1,0 +1,627 @@
+Here is the **complete, single block of code** containing the entire website with all the detailed migration stories, the updated Ronaldo vs. Kohli comparison focusing on their life movements (including Kohli's connection to London), and the luxury design.
+
+1.  **Copy** the code below.
+2.  **Paste** it into `ronaldo.html`.
+3.  **Save** and open in your browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CR7: The Infinite Journey</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    /* --- 1. LUXURY CORE --- */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Oswald:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap');
+
+    :root {
+        --bg-deep: #050505;
+        --bg-panel: #0b0b0b;
+        --gold: #D4AF37;
+        --gold-dim: #8a701e;
+        --text-main: #e0e0e0;
+        --text-muted: #999;
+        --glass: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(212, 175, 55, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+    body {
+        background-color: var(--bg-deep);
+        color: var(--text-main);
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+        line-height: 1.8;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+    /* Typography */
+    h1, h2, h3, .nav-logo { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+    .serif { font-family: 'Playfair Display', serif; }
+    
+    .gold-text {
+        color: var(--gold);
+        background: linear-gradient(to right, #D4AF37, #F4DF89, #D4AF37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shine 5s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    /* Quote Styles */
+    .quote-box {
+        border-left: 2px solid var(--gold);
+        padding-left: 20px;
+        margin: 20px 0;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #fff;
+        opacity: 0.8;
+        font-size: 1.1rem;
+    }
+
+    /* --- 2. NAVIGATION --- */
+    nav {
+        position: fixed; top: 0; width: 100%; height: 80px;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 4vw; z-index: 1000;
+        background: rgba(5,5,5,0.9); backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-logo { font-size: 1.5rem; letter-spacing: 2px; font-weight: 600; }
+    .nav-links { display: flex; gap: 30px; }
+    .nav-btn {
+        background: none; border: none; color: #fff;
+        font-family: 'Oswald', sans-serif; font-size: 0.9rem; letter-spacing: 2px;
+        opacity: 0.5; transition: 0.3s; position: relative;
+    }
+    .nav-btn::after {
+        content: ''; position: absolute; bottom: -5px; left: 0; width: 0%;
+        height: 1px; background: var(--gold); transition: 0.3s;
+    }
+    .nav-btn:hover, .nav-btn.active { opacity: 1; color: var(--gold); }
+    .nav-btn:hover::after, .nav-btn.active::after { width: 100%; }
+
+    /* --- 3. PAGE SYSTEM --- */
+    .page-section {
+        display: none; padding-top: 80px; min-height: 100vh;
+        animation: fadeIn 0.8s ease-out;
+    }
+    .page-section.active-page { display: block; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================= HOME / INTRO ================= */
+    .hero {
+        height: 90vh; display: flex; flex-direction: column;
+        justify-content: center; align-items: center; text-align: center;
+        background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-deep) 70%);
+        position: relative;
+    }
+    .hero h1 { font-size: 7vw; line-height: 0.9; margin-bottom: 20px; }
+    .hero-sub { font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); opacity: 0.8; }
+    
+    .scroll-indicator {
+        position: absolute; bottom: 40px; display: flex;
+        flex-direction: column; align-items: center; gap: 10px;
+        opacity: 0.6; animation: bounce 2s infinite;
+    }
+    .scroll-line { width: 1px; height: 50px; background: var(--gold); }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+    .intro-narrative { max-width: 800px; margin: 0 auto; padding: 100px 20px; text-align: center; }
+    .intro-narrative p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; text-align: justify; }
+    .intro-narrative h2 { font-size: 3rem; margin-bottom: 40px; color: var(--gold); }
+
+    /* ================= MIGRATION PAGE ================= */
+    .migration-container { max-width: 1400px; margin: 0 auto; padding: 50px 20px; }
+    .mig-header { text-align: center; margin-bottom: 80px; }
+    .mig-header h2 { font-size: 4rem; margin-bottom: 10px; }
+
+    .mig-row {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+        margin-bottom: 180px; align-items: start;
+    }
+    .mig-row.reverse { direction: rtl; }
+    .mig-row.reverse .mig-text { direction: ltr; }
+    
+    .mig-text h3 { font-size: 2.5rem; margin-bottom: 20px; color: #fff; }
+    .mig-text p { margin-bottom: 20px; color: #aaa; }
+    .mig-sub-header { color: var(--gold); font-family: 'Oswald'; margin-top: 30px; margin-bottom: 10px; letter-spacing: 1px; }
+
+    .arrow-badge {
+        border: 1px solid var(--gold); color: var(--gold); padding: 5px 15px;
+        font-family: 'Oswald'; letter-spacing: 2px; display: inline-block; margin-bottom: 15px;
+    }
+
+    .mig-card {
+        background: var(--glass); border: 1px solid var(--glass-border);
+        padding: 40px; border-radius: 10px; position: relative;
+        transform-style: preserve-3d; transition: transform 0.1s;
+        backdrop-filter: blur(10px); top: 50px;
+    }
+    .mig-card-header {
+        display: flex; justify-content: space-between; margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;
+    }
+    .mig-icon { font-size: 2rem; color: var(--gold); }
+    .info-split { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .info-block h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 5px; }
+    .info-block p { font-size: 0.95rem; color: #aaa; }
+
+    /* ================= TIMELINE PAGE ================= */
+    .timeline-wrap { position: relative; max-width: 1000px; margin: 50px auto; }
+    .timeline-wrap::after {
+        content: ''; position: absolute; width: 2px; background: var(--gold);
+        top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+    }
+    .tl-item {
+        width: 50%; padding: 20px 40px; position: relative;
+        opacity: 0; transform: translateY(30px); transition: 0.6s;
+    }
+    .tl-item.visible { opacity: 1; transform: translateY(0); }
+    .tl-left { left: 0; text-align: right; }
+    .tl-right { left: 50%; text-align: left; }
+    .tl-dot {
+        position: absolute; width: 16px; height: 16px; background: var(--bg-deep);
+        border: 3px solid var(--gold); border-radius: 50%; top: 30px; z-index: 10;
+    }
+    .tl-left .tl-dot { right: -8px; }
+    .tl-right .tl-dot { left: -8px; }
+    .tl-content {
+        background: #111; padding: 25px; border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .tl-year {
+        font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.05);
+        position: absolute; top: 10px;
+    }
+    .tl-left .tl-year { left: 20px; }
+    .tl-right .tl-year { right: 20px; }
+
+    /* ================= COMPARISON PAGE ================= */
+    .compare-wrap { max-width: 1400px; margin: 0 auto; padding: 50px 20px; }
+    .compare-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+    
+    .c-btn {
+        background: rgba(255,255,255,0.05); color: #fff;
+        border: 1px solid rgba(255,255,255,0.1); padding: 12px 30px;
+        font-family: 'Oswald'; cursor: none; transition: 0.3s;
+    }
+    .c-btn:hover, .c-btn.active { background: var(--gold); color: #000; }
+    
+    .arena { display: grid; grid-template-columns: 1fr 0.1fr 1fr; gap: 30px; align-items: start; }
+    
+    .fighter {
+        background: var(--glass); padding: 40px; text-align: center;
+        border: 1px solid var(--glass-border); min-height: 450px; transition: 0.4s;
+    }
+    .f-img {
+        width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 20px;
+        background-size: cover; border: 2px solid var(--gold);
+    }
+    .vs {
+        display: flex; align-items: center; justify-content: center;
+        font-size: 2rem; font-family: 'Oswald'; color: var(--gold); height: 100%;
+    }
+    
+    .stat-mini-box {
+        margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 20px; text-align: left; font-size: 0.8rem;
+    }
+    .stat-row { display: flex; justify-content: space-between; margin-bottom: 5px; color: #888; }
+    .stat-val { color: #fff; font-weight: 600; }
+
+    /* --- CUSTOM CURSOR --- */
+    .cursor {
+        width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%;
+        position: fixed; pointer-events: none; z-index: 9999;
+        mix-blend-mode: difference; transition: transform 0.1s;
+    }
+    .cursor-dot {
+        width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+        position: fixed; pointer-events: none; z-index: 9999;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 15vw; }
+        .mig-row, .mig-row.reverse { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
+        .mig-row.reverse .mig-text { direction: ltr; }
+        .arena { grid-template-columns: 1fr; gap: 50px; }
+        .vs { transform: rotate(90deg); margin: 20px 0; }
+        .timeline-wrap::after { left: 20px; }
+        .tl-item { width: 100%; padding-left: 50px; padding-right: 0; text-align: left; }
+        .tl-left, .tl-right { left: 0; }
+        .tl-left .tl-dot, .tl-right .tl-dot { left: 11px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<nav>
+    <div class="nav-logo">CR7<span class="gold-text">.MIGRATION</span></div>
+    <div class="nav-links">
+        <button class="nav-btn active" onclick="showPage('home', this)">INTRO</button>
+        <button class="nav-btn" onclick="showPage('migration', this)">MIGRATION</button>
+        <button class="nav-btn" onclick="showPage('timeline', this)">TIMELINE</button>
+        <button class="nav-btn" onclick="showPage('comparison', this)">THE PARALLEL</button>
+    </div>
+</nav>
+
+<!-- ================= 1. HOME ================= -->
+<section id="home" class="page-section active-page">
+    <div class="hero">
+        <h1>BEYOND<br>BORDERS</h1>
+        <div class="hero-sub">THE BOY FROM MADEIRA</div>
+        <div class="scroll-indicator">
+            <span>SCROLL TO READ</span>
+            <div class="scroll-line"></div>
+        </div>
+    </div>
+    <div class="intro-narrative">
+        <h2>THE ORIGIN STORY</h2>
+        <p>It began on the steep streets of Funchal, Madeira. Cristiano Ronaldo was not born into greatness; he was born into obscurity. The youngest child of a cook and a gardener, his world was small, but his vision was infinite.</p>
+        <p>The "Boy from Madeira" moniker is not just a nickname; it is a reminder of the first and most painful migration of his life. At age 12, he left his island to move to Lisbon alone. He cried every day. He was mocked for his accent. He had no money, only a burning desire to be the best.</p>
+        <p>That isolation forged a warrior. It taught him that to migrate is to grow. To leave comfort is to find power. This website documents the geographical and psychological journey of a man who refused to stay where he began.</p>
+        <button class="nav-btn" style="border:1px solid var(--gold); padding: 15px 30px; opacity: 1; margin-top: 30px;" onclick="showPage('migration', document.querySelectorAll('.nav-btn')[1])">
+            WITNESS THE MIGRATION
+        </button>
+    </div>
+</section>
+
+<!-- ================= 2. MIGRATION STORY (DETAILED) ================= -->
+<section id="migration" class="page-section">
+    <div class="migration-container">
+        <div class="mig-header">
+            <h2 class="gold-text">THE ODYSSEY</h2>
+            <p class="serif" style="color:#888;">"I am not a player of one place. I am a citizen of the world."</p>
+        </div>
+
+        <!-- 1. Madeira to Lisbon -->
+        <div class="mig-row">
+            <div class="mig-text">
+                <span class="arrow-badge">MADEIRA ➔ LISBON</span>
+                <h3>THE EXILE OF CHILDHOOD</h3>
+                <div class="quote-box">"I cried every day. I wanted to go home."</div>
+                
+                <h4 class="mig-sub-header">LEAVING THE ISLAND</h4>
+                <p>To understand Ronaldo, you must understand this first migration. It was not a luxury transfer; it was a child being ripped from his roots. The dialect in Madeira is thick and distinct. When he arrived in Lisbon, he was an alien in his own country.</p>
+                
+                <h4 class="mig-sub-header">THE HOSTILE ARRIVAL</h4>
+                <p>He was mocked relentlessly by other children for his accent. This created a psychological "bunker mentality" that would define his career. He stopped talking and started training. He decided that if they couldn't understand his words, they would fear his feet. This migration turned a boy into a singular, isolated force of nature.</p>
+            </div>
+            <div class="mig-card" data-tilt>
+                <div class="mig-card-header">
+                    <i class="fas fa-suitcase mig-icon"></i>
+                    <span style="font-family:'Oswald'; color:#666;">1997 - 2003</span>
+                </div>
+                <div class="info-split">
+                    <div class="info-block">
+                        <h4><i class="fas fa-map-marker-alt"></i> THE SHIFT</h4>
+                        <p>From the warmth of family to a cold dormitory with other poor academy players.</p>
+                    </div>
+                    <div class="info-block" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+                        <h4><i class="fas fa-brain"></i> MENTALITY</h4>
+                        <p>Constructed the armor of arrogance to protect the crying child inside. The birth of "The Best."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Lisbon to Manchester -->
+        <div class="mig-row reverse">
+            <div class="mig-text">
+                <span class="arrow-badge">LISBON ➔ MANCHESTER</span>
+                <h3>INTO THE STORM</h3>
+                <div class="quote-box">"It was raining, it was cold... and Ferguson was my father."</div>
+
+                <h4 class="mig-sub-header">LEAVING THE SUN</h4>
+                <p>He left the technical, sun-drenched football of Portugal for the brutal, grey physicality of Northern England. This was his first international migration. He arrived a skinny teenager with "spaghetti hair" and a bag of tricks.</p>
+
+                <h4 class="mig-sub-header">ADAPTING TO THE NORTH</h4>
+                <p>The Premier League defenders tried to kick him out of the country. But he didn't run. He migrated his body type—transforming from a winger into a light-heavyweight athlete. He absorbed the English "never say die" spirit, merging it with his Latin flair. This migration proved he could conquer the toughest league on earth.</p>
+            </div>
+            <div class="mig-card" data-tilt>
+                <div class="mig-card-header">
+                    <i class="fas fa-umbrella mig-icon"></i>
+                    <span style="font-family:'Oswald'; color:#666;">2003 - 2009</span>
+                </div>
+                <div class="info-split">
+                    <div class="info-block">
+                        <h4><i class="fas fa-map-marker-alt"></i> THE SHIFT</h4>
+                        <p>A cultural shock. Learning English, dealing with the paparazzi, and replacing David Beckham.</p>
+                    </div>
+                    <div class="info-block" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+                        <h4><i class="fas fa-dumbbell"></i> TRANSFORMATION</h4>
+                        <p>He arrived as a boy who did stepovers. He left as the Ballon d'Or winner.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Manchester to Madrid -->
+        <div class="mig-row">
+            <div class="mig-text">
+                <span class="arrow-badge">MANCHESTER ➔ MADRID</span>
+                <h3>THE ROYAL ASCENSION</h3>
+                <div class="quote-box">"I am here to write history."</div>
+
+                <h4 class="mig-sub-header">THE WEIGHT OF EXPECTATION</h4>
+                <p>Most players migrate for money or comfort; Ronaldo migrated for pressure. He moved to a club that eats its own legends. Leaving the adoration of Manchester, where he was loved, to enter the critical cauldron of the Bernabéu was a calculated risk.</p>
+
+                <h4 class="mig-sub-header">CONQUERING THE WORLD</h4>
+                <p>This was the migration from "Great Player" to "Global Icon." He had to learn a new language, adapt to the late-night Spanish culture, and go head-to-head with Lionel Messi every week. He didn't just adapt; he took over. He became the King of Spain, scoring more goals than games played.</p>
+            </div>
+            <div class="mig-card" data-tilt>
+                <div class="mig-card-header">
+                    <i class="fas fa-crown mig-icon"></i>
+                    <span style="font-family:'Oswald'; color:#666;">2009 - 2018</span>
+                </div>
+                <div class="info-split">
+                    <div class="info-block">
+                        <h4><i class="fas fa-map-marker-alt"></i> THE SHIFT</h4>
+                        <p>From the industrial north of England to the aristrocratic capital of Spain. 80,000 people at his presentation.</p>
+                    </div>
+                    <div class="info-block" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+                        <h4><i class="fas fa-star"></i> LEGACY</h4>
+                        <p>4 Champions Leagues. 450 Goals. The greatest era of his life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Europe to Saudi Arabia -->
+        <div class="mig-row reverse">
+            <div class="mig-text">
+                <span class="arrow-badge">EUROPE ➔ SAUDI ARABIA</span>
+                <h3>THE PARADIGM SHIFT</h3>
+                <div class="quote-box">"I conquered Europe. It is time to share my experience in Asia."</div>
+
+                <h4 class="mig-sub-header">LEAVING THE OLD WORLD</h4>
+                <p>Following a tumultuous return to Manchester and a brief stint in Turin, Ronaldo made the most controversial migration of modern sports history. He left the continent that crowned him king.</p>
+
+                <h4 class="mig-sub-header">A NEW KINGDOM</h4>
+                <p>This migration was not just geographical; it was cultural. Moving his family to Riyadh, adapting to Islamic customs, the extreme heat, and a completely different style of football. Critics called it retirement; he called it a revolution. Within months, other world-class players followed his migration path. He didn't just move to a league; he built one.</p>
+            </div>
+            <div class="mig-card" data-tilt>
+                <div class="mig-card-header">
+                    <i class="fas fa-globe-asia mig-icon"></i>
+                    <span style="font-family:'Oswald'; color:#666;">2023 - Present</span>
+                </div>
+                <div class="info-split">
+                    <div class="info-block">
+                        <h4><i class="fas fa-futbol"></i> FOOTBALL LIFE</h4>
+                        <p>Top Scorer of 2023. Brought global attention to the Saudi Pro League, triggering a mass migration of elite talent.</p>
+                    </div>
+                    <div class="info-block" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+                        <h4><i class="fas fa-user"></i> PERSONAL LIFE</h4>
+                        <p>Living in a palace in Riyadh. Navigating a strictly conservative culture while raising 5 children. A pioneer in a new land.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= 3. TIMELINE ================= -->
+<section id="timeline" class="page-section">
+    <div class="mig-header">
+        <h2 class="gold-text">CHRONICLE</h2>
+        <p class="serif" style="color:#888;">The timeline of a legend.</p>
+    </div>
+    <div class="timeline-wrap">
+        <div class="tl-item tl-left">
+            <div class="tl-year">2002</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+                <h3 style="color:#26a36c">Sporting CP</h3>
+                <p style="color:#888; margin-top:5px;">Left home at 12. Debut at 17.</p>
+            </div>
+        </div>
+        <div class="tl-item tl-right">
+            <div class="tl-year">2003</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+                <h3 style="color:#da291c">Man Utd</h3>
+                <p style="color:#888; margin-top:5px;">Migrated to England. Became a man.</p>
+            </div>
+        </div>
+        <div class="tl-item tl-left">
+            <div class="tl-year">2009</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+                <h3 style="color:#fff">Real Madrid</h3>
+                <p style="color:#888; margin-top:5px;">Migrated to Spain. Became a King.</p>
+            </div>
+        </div>
+        <div class="tl-item tl-right">
+            <div class="tl-year">2018</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+                <h3 style="color:#fff">Juventus</h3>
+                <p style="color:#888; margin-top:5px;">Conquered Italy. The challenge seeker.</p>
+            </div>
+        </div>
+        <div class="tl-item tl-left">
+            <div class="tl-year">2023</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+                <h3 style="color:#FBC02D">Al Nassr</h3>
+                <p style="color:#888; margin-top:5px;">The Great Eastern Migration.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= 4. COMPARISON (MIGRATION FOCUSED) ================= -->
+<section id="comparison" class="page-section">
+    <div class="mig-header">
+        <h2 class="gold-text">THE PARALLEL JOURNEYS</h2>
+        <p class="serif" style="color:#888;">Cristiano Ronaldo vs. Virat Kohli</p>
+        <p style="font-size: 0.9rem; color: #666; max-width: 600px; margin: 10px auto;">Two icons who defined their sports. Their journeys are defined not just by stats, but by where they came from and where they chose to go.</p>
+    </div>
+
+    <div class="compare-wrap">
+        <div class="compare-controls">
+            <button class="c-btn active" onclick="setCompare('roots')">THE ROOTS</button>
+            <button class="c-btn" onclick="setCompare('big_move')">THE BIG MOVE</button>
+            <button class="c-btn" onclick="setCompare('adaptation')">ADAPTATION</button>
+            <button class="c-btn" onclick="setCompare('current')">CURRENT HOME</button>
+        </div>
+
+        <div class="arena">
+            <!-- Ronaldo -->
+            <div class="fighter">
+                <div class="f-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg');"></div>
+                <h3 style="margin-bottom:10px;">CRISTIANO</h3>
+                <div class="stat-mini-box">
+                    <div class="stat-row"><span>Migrated From:</span> <span class="stat-val">Funchal, Madeira</span></div>
+                    <div class="stat-row"><span>Migrated To:</span> <span class="stat-val">Lisbon, UK, Spain, Italy, KSA</span></div>
+                </div>
+                <div id="cr-content" style="color:#aaa; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
+            </div>
+
+            <div class="vs">VS</div>
+
+            <!-- Kohli -->
+            <div class="fighter">
+                <div class="f-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg');"></div>
+                <h3 style="margin-bottom:10px;">KOHLI</h3>
+                <div class="stat-mini-box">
+                    <div class="stat-row"><span>Migrated From:</span> <span class="stat-val">West Delhi, India</span></div>
+                    <div class="stat-row"><span>Migrated To:</span> <span class="stat-val">Mumbai, London (Residency)</span></div>
+                </div>
+                <div id="vk-content" style="color:#aaa; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer style="text-align:center; padding:50px; border-top:1px solid rgba(255,255,255,0.05); color:#444; margin-top:50px;">
+    THE MIGRATION ARCHIVE &copy; 2024
+</footer>
+
+<script>
+    // --- 1. COMPARISON DATA (FOCUSED ON MIGRATION & MOVEMENT) ---
+    const data = {
+        roots: {
+            cr: "<strong>The Island Outcast.</strong> Born in Funchal, Madeira. Geographically isolated from mainland Portugal. He grew up in a tin-roofed shack in a neighborhood so poor it no longer exists. His migration began with a dream to escape poverty.",
+            vk: "<strong>The Delhi Street Fighter.</strong> Born in West Delhi (Prem Nagar). Growing up in the chaos of India's capital forged his aggression. He didn't have elite academies; he played on dust bowls. He migrated from the streets to the stadium through sheer will."
+        },
+        big_move: {
+            cr: "<strong>The Boy Who Left Home.</strong> At 12, he made the terrifying solo trip to Lisbon. He was mocked for his island accent and cried daily. This migration was the forge that hardened his heart and created his elite mentality.",
+            vk: "<strong>The Tragedy that Fueled Him.</strong> His 'migration' was internal. At 18, his father died in his arms at 3 AM. The next morning, he went to the field and scored a match-saving 90. He moved from being a boy to the man of the house overnight."
+        },
+        adaptation: {
+            cr: "<strong>The Cultural Chameleon.</strong> Migrated to England (physically toughened up), Spain (mastered technical dominance), Italy (tactical wisdom), and Saudi Arabia (leadership). He changes his game to fit the country he conquers.",
+            vk: "<strong>The Fitness Revolutionary.</strong> He didn't change countries to play, but he changed the culture of a country. He migrated Indian cricket from a 'skill-based' lazy approach to an elite athletic standard, introducing the Yo-Yo test and a strict diet."
+        },
+        current: {
+            cr: "<strong>The Pioneer in Riyadh.</strong> Ronaldo lives in Saudi Arabia, embracing the spotlight. He is the face of a nation's sporting project, living in luxury but constantly in the public eye. He migrated to be the center of attention.",
+            vk: "<strong>The Ghost in London.</strong> Unlike Ronaldo, Kohli migrates for silence. He has reportedly moved his base to London to escape the suffocating fame of India. There, he is just a normal dad, unrecognized in coffee shops. A migration for peace."
+        }
+    };
+
+    function setCompare(key) {
+        // UI Update
+        document.querySelectorAll('.c-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Content Update with Fade
+        const crPanel = document.getElementById('cr-content');
+        const vkPanel = document.getElementById('vk-content');
+
+        crPanel.style.opacity = 0;
+        vkPanel.style.opacity = 0;
+
+        setTimeout(() => {
+            crPanel.innerHTML = data[key].cr;
+            vkPanel.innerHTML = data[key].vk;
+            crPanel.style.opacity = 1;
+            vkPanel.style.opacity = 1;
+        }, 200);
+    }
+
+    // Init default comparison
+    setCompare('roots');
+
+    // --- 2. PAGE ROUTING ---
+    function showPage(id, btn) {
+        // Hide all pages
+        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
+        
+        // Show selected
+        document.getElementById(id).classList.add('active-page');
+        
+        // Update Nav
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+
+        // Scroll top
+        window.scrollTo(0,0);
+        
+        // Re-trigger scroll animations
+        setTimeout(initObserver, 100);
+    }
+
+    // --- 3. SCROLL ANIMATIONS ---
+    function initObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.tl-item').forEach(e => observer.observe(e));
+    }
+    initObserver();
+
+    // --- 4. 3D TILT & CURSOR ---
+    const cursor = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = (e.clientX - 15) + 'px';
+        cursor.style.top = (e.clientY - 15) + 'px';
+        dot.style.left = (e.clientX - 3) + 'px';
+        dot.style.top = (e.clientY - 3) + 'px';
+    });
+
+    // Tilt Logic
+    document.querySelectorAll('.mig-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Calculate rotation (max 10 deg)
+            const rotX = ((y - rect.height/2) / 20) * -1;
+            const rotY = ((x - rect.width/2) / 20);
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+        });
+    });
+</script>
+</body>
+</html>
+```

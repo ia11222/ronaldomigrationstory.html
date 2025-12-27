@@ -6,10 +6,11 @@
 <title>CR7: The Infinite Journey</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* --- 1. LUXURY CORE --- */
+    /* --- 1. LUXURY CORE & THEMING --- */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Oswald:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap');
 
     :root {
+        /* Dark Mode (Default) */
         --bg-deep: #050505;
         --bg-panel: #0b0b0b;
         --gold: #D4AF37;
@@ -19,6 +20,25 @@
         --text-muted: #999;
         --glass: rgba(255, 255, 255, 0.03);
         --glass-border: rgba(212, 175, 55, 0.15);
+        --hero-grad: radial-gradient(circle at center, #1a1a1a 0%, #050505 70%);
+        --card-bg: #111;
+        --tl-year: rgba(255, 255, 255, 0.12);
+        --nav-bg: rgba(5, 5, 5, 0.9);
+        --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+        /* Light Mode (Platinum Luxury) */
+        --bg-deep: #fdfdfd;
+        --bg-panel: #f5f5f5;
+        --text-main: #1a1a1a;
+        --text-muted: #666;
+        --glass: rgba(0, 0, 0, 0.03);
+        --glass-border: rgba(212, 175, 55, 0.3);
+        --hero-grad: radial-gradient(circle at center, #ffffff 0%, #ececec 70%);
+        --card-bg: #ffffff;
+        --tl-year: rgba(0, 0, 0, 0.08);
+        --nav-bg: rgba(253, 253, 253, 0.9);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -29,6 +49,7 @@
         font-family: 'Montserrat', sans-serif;
         overflow-x: hidden;
         line-height: 1.8;
+        transition: background-color var(--transition), color var(--transition);
     }
 
     /* Scrollbar */
@@ -57,7 +78,7 @@
         margin: 20px 0;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #fff;
+        color: var(--text-main);
         opacity: 0.8;
         font-size: 1.1rem;
     }
@@ -67,13 +88,14 @@
         position: fixed; top: 0; width: 100%; height: 80px;
         display: flex; justify-content: space-between; align-items: center;
         padding: 0 4vw; z-index: 1000;
-        background: rgba(5,5,5,0.9); backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        background: var(--nav-bg); backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        transition: background var(--transition);
     }
     .nav-logo { font-size: 1.5rem; letter-spacing: 2px; font-weight: 600; }
     .nav-links { display: flex; gap: 30px; }
     .nav-btn {
-        background: none; border: none; color: #fff;
+        background: none; border: none; color: var(--text-main);
         font-family: 'Oswald', sans-serif; font-size: 0.9rem; letter-spacing: 2px;
         opacity: 0.5; transition: 0.3s; position: relative;
     }
@@ -83,6 +105,19 @@
     }
     .nav-btn:hover, .nav-btn.active { opacity: 1; color: var(--gold); }
     .nav-btn:hover::after, .nav-btn.active::after { width: 100%; }
+
+    /* --- THEME TOGGLE BUTTON --- */
+    .theme-toggle {
+        position: fixed; bottom: 30px; right: 30px;
+        width: 60px; height: 60px; border-radius: 50%;
+        background: var(--gold); color: #000;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 9999; border: none;
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+    .theme-toggle i { font-size: 1.5rem; transition: transform 0.5s; }
 
     /* --- 3. PAGE SYSTEM --- */
     .page-section {
@@ -99,8 +134,9 @@
     .hero {
         height: 90vh; display: flex; flex-direction: column;
         justify-content: center; align-items: center; text-align: center;
-        background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-deep) 70%);
+        background: var(--hero-grad);
         position: relative;
+        transition: background var(--transition);
     }
     .hero h1 { font-size: 7vw; line-height: 0.9; margin-bottom: 20px; }
     .hero-sub { font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); opacity: 0.8; }
@@ -114,7 +150,7 @@
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
     .intro-narrative { max-width: 800px; margin: 0 auto; padding: 100px 20px; text-align: center; }
-    .intro-narrative p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; text-align: justify; }
+    .intro-narrative p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; text-align: justify; }
     .intro-narrative h2 { font-size: 3rem; margin-bottom: 40px; color: var(--gold); }
 
     /* ================= MIGRATION PAGE ================= */
@@ -129,8 +165,8 @@
     .mig-row.reverse { direction: rtl; }
     .mig-row.reverse .mig-text { direction: ltr; }
     
-    .mig-text h3 { font-size: 2.5rem; margin-bottom: 20px; color: #fff; }
-    .mig-text p { margin-bottom: 20px; color: #aaa; }
+    .mig-text h3 { font-size: 2.5rem; margin-bottom: 20px; color: var(--text-main); }
+    .mig-text p { margin-bottom: 20px; color: var(--text-muted); }
     .mig-sub-header { color: var(--gold); font-family: 'Oswald'; margin-top: 30px; margin-bottom: 10px; letter-spacing: 1px; }
 
     .arrow-badge {
@@ -141,31 +177,31 @@
     .mig-card {
         background: var(--glass); border: 1px solid var(--glass-border);
         padding: 40px; border-radius: 10px; position: relative;
-        transform-style: preserve-3d; transition: transform 0.1s;
+        transform-style: preserve-3d; transition: transform 0.1s, background var(--transition);
         backdrop-filter: blur(10px); top: 50px;
     }
     .mig-card-header {
         display: flex; justify-content: space-between; margin-bottom: 30px;
-        border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;
+        border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
     }
     .mig-icon { font-size: 2rem; color: var(--gold); }
     .info-split { display: grid; grid-template-columns: 1fr; gap: 20px; }
     .info-block h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 5px; }
-    .info-block p { font-size: 0.95rem; color: #aaa; }
+    .info-block p { font-size: 0.95rem; color: var(--text-muted); }
 
-    /* Simplified Summary Styles */
     .mig-summary {
-        background: linear-gradient(145deg, #0d0d0d, #050505);
+        background: var(--bg-panel);
         border: 1px solid var(--glass-border);
         padding: 60px;
         margin: 100px auto;
         max-width: 900px;
         border-radius: 4px;
         text-align: center;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        transition: background var(--transition);
     }
     .mig-summary h3 { color: var(--gold); font-size: 2rem; margin-bottom: 30px; }
-    .mig-summary p { font-size: 1.1rem; color: #ddd; line-height: 1.8; margin-bottom: 20px; }
+    .mig-summary p { font-size: 1.1rem; color: var(--text-main); line-height: 1.8; margin-bottom: 20px; }
     .vocab-hint { color: var(--gold); font-weight: 600; }
 
     /* ================= TIMELINE PAGE ================= */
@@ -184,19 +220,22 @@
     .tl-dot {
         position: absolute; width: 16px; height: 16px; background: var(--bg-deep);
         border: 3px solid var(--gold); border-radius: 50%; top: 30px; z-index: 10;
+        transition: background var(--transition);
     }
     .tl-left .tl-dot { right: -8px; }
     .tl-right .tl-dot { left: -8px; }
     .tl-content {
-        background: #111; padding: 25px; border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.1);
+        background: var(--card-bg); padding: 25px; border-radius: 8px;
+        border: 1px solid var(--glass-border);
+        transition: background var(--transition);
     }
     .tl-year {
         font-size: 3.5rem; font-weight: 700; 
-        color: rgba(255,255,255,0.12); /* Slightly more prominent */
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); /* Added subtle outline */
+        color: var(--tl-year);
+        -webkit-text-stroke: 1px rgba(128, 128, 128, 0.05);
         position: absolute; top: 10px;
         pointer-events: none;
+        transition: color var(--transition);
     }
     .tl-left .tl-year { left: 20px; }
     .tl-right .tl-year { right: 20px; }
@@ -206,8 +245,8 @@
     .compare-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
     
     .c-btn {
-        background: rgba(255,255,255,0.05); color: #fff;
-        border: 1px solid rgba(255,255,255,0.1); padding: 12px 30px;
+        background: var(--glass); color: var(--text-main);
+        border: 1px solid var(--glass-border); padding: 12px 30px;
         font-family: 'Oswald'; cursor: none; transition: 0.3s;
     }
     .c-btn:hover, .c-btn.active { background: var(--gold); color: #000; }
@@ -226,13 +265,6 @@
         display: flex; align-items: center; justify-content: center;
         font-size: 2rem; font-family: 'Oswald'; color: var(--gold); height: 100%;
     }
-    
-    .stat-mini-box {
-        margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
-        padding-top: 20px; text-align: left; font-size: 0.8rem;
-    }
-    .stat-row { display: flex; justify-content: space-between; margin-bottom: 5px; color: #888; }
-    .stat-val { color: #fff; font-weight: 600; }
 
     /* --- TRANSITION BUTTON STYLE --- */
     .transition-btn {
@@ -266,13 +298,18 @@
         .tl-left, .tl-right { left: 0; }
         .tl-left .tl-dot, .tl-right .tl-dot { left: 11px; }
         .mig-summary { padding: 30px; }
+        .theme-toggle { bottom: 20px; right: 20px; width: 50px; height: 50px; }
     }
 </style>
 </head>
-<body>
+<body data-theme="dark">
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-dot" id="cursorDot"></div>
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Eclipse Mode">
+    <i class="fas fa-moon"></i>
+</button>
 
 <nav>
     <div class="nav-logo">CR7<span class="gold-text">.MIGRATION</span></div>
@@ -310,10 +347,9 @@
     <div class="migration-container">
         <div class="mig-header">
             <h2 class="gold-text">THE ODYSSEY</h2>
-            <p class="serif" style="color:#888;">"I am not a player of one place. I am a citizen of the world."</p>
+            <p class="serif">"I am not a player of one place. I am a citizen of the world."</p>
         </div>
 
-        <!-- 1. Madeira to Lisbon -->
         <div class="mig-row">
             <div class="mig-text">
                 <span class="arrow-badge">MADEIRA ➔ LISBON</span>
@@ -324,7 +360,7 @@
             <div class="mig-card">
                 <div class="mig-card-header">
                     <i class="fas fa-suitcase mig-icon"></i>
-                    <span style="font-family:'Oswald'; color:#666;">1997 - 2003</span>
+                    <span style="font-family:'Oswald'; opacity: 0.6;">1997 - 2003</span>
                 </div>
                 <div class="info-block">
                     <h4>THE TRANSFORMATION</h4>
@@ -333,7 +369,6 @@
             </div>
         </div>
 
-        <!-- 2. Lisbon to Manchester -->
         <div class="mig-row reverse">
             <div class="mig-text">
                 <span class="arrow-badge">LISBON ➔ MANCHESTER</span>
@@ -344,7 +379,7 @@
             <div class="mig-card">
                 <div class="mig-card-header">
                     <i class="fas fa-umbrella mig-icon"></i>
-                    <span style="font-family:'Oswald'; color:#666;">2003 - 2009</span>
+                    <span style="font-family:'Oswald'; opacity: 0.6;">2003 - 2009</span>
                 </div>
                 <div class="info-block">
                     <h4>THE GROWTH</h4>
@@ -353,7 +388,6 @@
             </div>
         </div>
 
-        <!-- 3. Manchester to Madrid -->
         <div class="mig-row">
             <div class="mig-text">
                 <span class="arrow-badge">MANCHESTER ➔ MADRID</span>
@@ -364,7 +398,7 @@
             <div class="mig-card">
                 <div class="mig-card-header">
                     <i class="fas fa-crown mig-icon"></i>
-                    <span style="font-family:'Oswald'; color:#666;">2009 - 2018</span>
+                    <span style="font-family:'Oswald'; opacity: 0.6;">2009 - 2018</span>
                 </div>
                 <div class="info-block">
                     <h4>THE PEAK</h4>
@@ -373,7 +407,6 @@
             </div>
         </div>
 
-        <!-- 4. Europe to Saudi Arabia -->
         <div class="mig-row reverse">
             <div class="mig-text">
                 <span class="arrow-badge">EUROPE ➔ SAUDI ARABIA</span>
@@ -384,7 +417,7 @@
             <div class="mig-card">
                 <div class="mig-card-header">
                     <i class="fas fa-globe-asia mig-icon"></i>
-                    <span style="font-family:'Oswald'; color:#666;">2023 - Present</span>
+                    <span style="font-family:'Oswald'; opacity: 0.6;">2023 - Present</span>
                 </div>
                 <div class="info-block">
                     <h4>THE PIONEER</h4>
@@ -393,11 +426,10 @@
             </div>
         </div>
 
-        <!-- SUMMARY -->
         <div class="mig-summary">
             <h3>THE ARCHITECT OF ADAPTATION</h3>
-            <p>Cristiano Ronaldo’s career is a story of constant change. He never stayed in his comfort zone. By moving from country to country, he showed incredible <span class="vocab-hint">resilience</span> (the ability to recover quickly from difficult situations).</p>
-            <p>From the small streets of Madeira to the huge stadiums of Riyadh, his journey teaches us that you must have the courage to leave where you are to become who you want to be. He didn't just move for football; he moved to prove he could win anywhere.</p>
+            <p>Cristiano Ronaldo’s career is a story of constant change. He never stayed in his comfort zone. By moving from country to country, he showed incredible <span class="vocab-hint">resilience</span>.</p>
+            <p>From the small streets of Madeira to the huge stadiums of Riyadh, his journey teaches us that you must have the courage to leave where you are to become who you want to be.</p>
             
             <button class="transition-btn" onclick="showPage('timeline', document.querySelectorAll('.nav-btn')[2])">
                 VIEW THE TIMELINE <i class="fas fa-arrow-right" style="margin-left:10px;"></i>
@@ -410,7 +442,7 @@
 <section id="timeline" class="page-section">
     <div class="mig-header">
         <h2 class="gold-text">CHRONICLE</h2>
-        <p class="serif" style="color:#888;">The timeline of a legend.</p>
+        <p class="serif">The timeline of a legend.</p>
     </div>
     <div class="timeline-wrap">
         <div class="tl-item tl-left">
@@ -418,7 +450,7 @@
             <div class="tl-dot"></div>
             <div class="tl-content">
                 <h3 style="color:#26a36c">Sporting CP</h3>
-                <p style="color:#888; margin-top:5px;">Where it all began. Debut at 17.</p>
+                <p style="opacity:0.6; margin-top:5px;">Where it all began. Debut at 17.</p>
             </div>
         </div>
         <div class="tl-item tl-right">
@@ -426,23 +458,23 @@
             <div class="tl-dot"></div>
             <div class="tl-content">
                 <h3 style="color:#da291c">Man Utd</h3>
-                <p style="color:#888; margin-top:5px;">Migrated to England. Became a global star.</p>
+                <p style="opacity:0.6; margin-top:5px;">Migrated to England. Became a global star.</p>
             </div>
         </div>
         <div class="tl-item tl-left">
             <div class="tl-year">2009</div>
             <div class="tl-dot"></div>
             <div class="tl-content">
-                <h3 style="color:#00529F">Real Madrid</h3> <!-- Specific Blue -->
-                <p style="color:#888; margin-top:5px;">The King of Spain. 4 Champions Leagues.</p>
+                <h3 style="color:#00529F">Real Madrid</h3>
+                <p style="opacity:0.6; margin-top:5px;">The King of Spain. 4 Champions Leagues.</p>
             </div>
         </div>
         <div class="tl-item tl-right">
             <div class="tl-year">2018</div>
             <div class="tl-dot"></div>
             <div class="tl-content">
-                <h3 style="color:#fff">Juventus</h3>
-                <p style="color:#888; margin-top:5px;">Conquered Italy. Two Serie A titles.</p>
+                <h3 style="color:var(--text-main)">Juventus</h3>
+                <p style="opacity:0.6; margin-top:5px;">Conquered Italy. Two Serie A titles.</p>
             </div>
         </div>
         <div class="tl-item tl-left">
@@ -450,7 +482,7 @@
             <div class="tl-dot"></div>
             <div class="tl-content">
                 <h3 style="color:#FBC02D">Al Nassr</h3>
-                <p style="color:#888; margin-top:5px;">A new chapter in the East.</p>
+                <p style="opacity:0.6; margin-top:5px;">A new chapter in the East.</p>
             </div>
         </div>
     </div>
@@ -463,7 +495,7 @@
 <section id="comparison" class="page-section">
     <div class="mig-header">
         <h2 class="gold-text">THE PARALLEL JOURNEYS</h2>
-        <p class="serif" style="color:#888;">Cristiano Ronaldo vs. Virat Kohli</p>
+        <p class="serif">Cristiano Ronaldo vs. Virat Kohli</p>
     </div>
 
     <div class="compare-wrap">
@@ -478,24 +510,49 @@
             <div class="fighter">
                 <div class="f-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg');"></div>
                 <h3>CRISTIANO</h3>
-                <div id="cr-content" style="color:#aaa; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
+                <div id="cr-content" style="opacity:0.8; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
             </div>
             <div class="vs">VS</div>
             <div class="fighter">
                 <div class="f-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg');"></div>
                 <h3>KOHLI</h3>
-                <div id="vk-content" style="color:#aaa; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
+                <div id="vk-content" style="opacity:0.8; font-size:0.95rem; margin-top:20px; line-height: 1.6;"></div>
             </div>
         </div>
     </div>
 </section>
 
-<footer style="text-align:center; padding:50px; color:#444; border-top:1px solid #111;">
+<footer style="text-align:center; padding:50px; opacity:0.4; border-top:1px solid var(--glass-border);">
     THE MIGRATION ARCHIVE &copy; 2024
 </footer>
 
 <script>
-    // --- COMPARISON DATA ---
+    // --- THEME LOGIC ---
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('cr7-theme') || 'dark';
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    });
+
+    function setTheme(theme) {
+        body.setAttribute('data-theme', theme);
+        localStorage.setItem('cr7-theme', theme);
+        
+        if (theme === 'light') {
+            icon.className = 'fas fa-sun';
+            themeToggle.style.transform = 'rotate(180deg)';
+        } else {
+            icon.className = 'fas fa-moon';
+            themeToggle.style.transform = 'rotate(0deg)';
+        }
+    }
+
     const data = {
         roots: {
             cr: "Born in Madeira. He grew up in poverty on a small island, far from the mainland. This isolation gave him the hunger to escape and succeed.",
@@ -525,17 +582,15 @@
     }
     setCompare('roots');
 
-    // --- PAGE ROUTING ---
     function showPage(id, btn) {
         document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
         document.getElementById(id).classList.add('active-page');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
-        window.scrollTo(0,0);
+        window.scrollTo({top: 0, behavior: 'smooth'});
         setTimeout(initObserver, 100);
     }
 
-    // --- SCROLL ANIMATIONS ---
     function initObserver() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -546,7 +601,6 @@
     }
     initObserver();
 
-    // --- CURSOR ---
     const cursor = document.getElementById('cursor');
     const dot = document.getElementById('cursorDot');
     document.addEventListener('mousemove', (e) => {
@@ -556,7 +610,6 @@
         dot.style.top = (e.clientY - 3) + 'px';
     });
 
-    // --- CARD TILT ---
     document.querySelectorAll('.mig-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
